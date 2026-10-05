@@ -1,3 +1,5 @@
+![Gemma Atlas Welcome](images/gemma-atlas-welcome.jpeg)
+
 This study space is built with Gemma 2 and Mastra, conceived to help students, including self-paced learners, to master any topic they want, especially when they don't know what 
 to start with.
 
