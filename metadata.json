@@ -1,0 +1,6 @@
+{
+  "name": "Gemma Sibling Study Hub",
+  "description": "Adaptive, empathetic, private workspace exclusively powered by Gemma 2 (Cloud 9B & Local 2B) for exam success.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

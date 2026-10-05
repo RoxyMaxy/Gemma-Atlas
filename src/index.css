@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0f1d;
+  --bg-card: #161f38;
+  --bg-sticker: #ffffff;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dark: #0a0f1d;
+  --border-color: #ffffff;
+  --mlh-red: #be1e2d;
+  --accent-color: #3b82f6;
+  --font-montserrat: 'Montserrat', 'Arial Black', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* Palette Overrides: Blue */
+[data-palette="blue"][data-theme="dark"] {
+  --bg-primary: #061024;
+  --bg-card: #0c1c3d;
+  --border-color: #3b82f6;
+  --text-main: #eff6ff;
+  --text-muted: #93c5fd;
+  --bg-sticker: #3b82f6;
+  --text-dark: #ffffff;
+  --accent-color: #3b82f6;
+}
+[data-palette="blue"][data-theme="light"] {
+  --bg-primary: #eff6ff;
+  --bg-card: #ffffff;
+  --border-color: #1d4ed8;
+  --text-main: #1e3a8a;
+  --text-muted: #3b82f6;
+  --bg-sticker: #1d4ed8;
+  --text-dark: #ffffff;
+  --accent-color: #1d4ed8;
+}
+
+/* Palette Overrides: Green */
+[data-palette="green"][data-theme="dark"] {
+  --bg-primary: #041c11;
+  --bg-card: #0a3020;
+  --border-color: #10b981;
+  --text-main: #ecfdf5;
+  --text-muted: #6ee7b7;
+  --bg-sticker: #10b981;
+  --text-dark: #000000;
+  --accent-color: #10b981;
+}
+[data-palette="green"][data-theme="light"] {
+  --bg-primary: #f0fdf4;
+  --bg-card: #ffffff;
+  --border-color: #047857;
+  --text-main: #064e3b;
+  --text-muted: #059669;
+  --bg-sticker: #047857;
+  --text-dark: #ffffff;
+  --accent-color: #047857;
+}
+
+/* Palette Overrides: Orange */
+[data-palette="orange"][data-theme="dark"] {
+  --bg-primary: #1c0e04;
+  --bg-card: #301908;
+  --border-color: #f59e0b;
+  --text-main: #fffbeb;
+  --text-muted: #fcd34d;
+  --bg-sticker: #f59e0b;
+  --text-dark: #000000;
+  --accent-color: #f59e0b;
+}
+[data-palette="orange"][data-theme="light"] {
+  --bg-primary: #fffbeb;
+  --bg-card: #ffffff;
+  --border-color: #b45309;
+  --text-main: #78350f;
+  --text-muted: #d97706;
+  --bg-sticker: #b45309;
+  --text-dark: #ffffff;
+  --accent-color: #b45309;
+}
+
+/* Palette Overrides: Red */
+[data-palette="red"][data-theme="dark"] {
+  --bg-primary: #1c0505;
+  --bg-card: #330b0b;
+  --border-color: #ef4444;
+  --text-main: #fef2f2;
+  --text-muted: #fca5a5;
+  --bg-sticker: #ef4444;
+  --text-dark: #ffffff;
+  --accent-color: #ef4444;
+}
+[data-palette="red"][data-theme="light"] {
+  --bg-primary: #fef2f2;
+  --bg-card: #ffffff;
+  --border-color: #b91c1c;
+  --text-main: #7f1d1d;
+  --text-muted: #dc2626;
+  --bg-sticker: #b91c1c;
+  --text-dark: #ffffff;
+  --accent-color: #b91c1c;
+}
+
+/* Palette Overrides: Purple */
+[data-palette="purple"][data-theme="dark"] {
+  --bg-primary: #150828;
+  --bg-card: #250f45;
+  --border-color: #a855f7;
+  --text-main: #faf5ff;
+  --text-muted: #d8b4fe;
+  --bg-sticker: #a855f7;
+  --text-dark: #ffffff;
+  --accent-color: #a855f7;
+}
+[data-palette="purple"][data-theme="light"] {
+  --bg-primary: #faf5ff;
+  --bg-card: #ffffff;
+  --border-color: #7e22ce;
+  --text-main: #581c87;
+  --text-muted: #9333ea;
+  --bg-sticker: #7e22ce;
+  --text-dark: #ffffff;
+  --accent-color: #7e22ce;
+}
+
+/* Palette Overrides: Pink */
+[data-palette="pink"][data-theme="dark"] {
+  --bg-primary: #1e0514;
+  --bg-card: #380a26;
+  --border-color: #ec4899;
+  --text-main: #fdf2f8;
+  --text-muted: #f472b6;
+  --bg-sticker: #ec4899;
+  --text-dark: #ffffff;
+  --accent-color: #ec4899;
+}
+[data-palette="pink"][data-theme="light"] {
+  --bg-primary: #fdf2f8;
+  --bg-card: #ffffff;
+  --border-color: #be185d;
+  --text-main: #831843;
+  --text-muted: #db2777;
+  --bg-sticker: #be185d;
+  --text-dark: #ffffff;
+  --accent-color: #be185d;
+}
+
+/* Palette Overrides: Yellow */
+[data-palette="yellow"][data-theme="dark"] {
+  --bg-primary: #1c1803;
+  --bg-card: #332b07;
+  --border-color: #eab308;
+  --text-main: #fefce8;
+  --text-muted: #fde047;
+  --bg-sticker: #eab308;
+  --text-dark: #000000;
+  --accent-color: #eab308;
+}
+[data-palette="yellow"][data-theme="light"] {
+  --bg-primary: #fefce8;
+  --bg-card: #ffffff;
+  --border-color: #a16207;
+  --text-main: #713f12;
+  --text-muted: #ca8a04;
+  --bg-sticker: #a16207;
+  --text-dark: #ffffff;
+  --accent-color: #a16207;
+}
+
+/* Palette Overrides: Slate / MLH Classic */
+[data-palette="slate"][data-theme="dark"] {
+  --bg-primary: #0a0f1d;
+  --bg-card: #161f38;
+  --border-color: #ffffff;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --bg-sticker: #ffffff;
+  --text-dark: #0a0f1d;
+  --accent-color: #ffffff;
+}
+[data-palette="slate"][data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #0a0f1d;
+  --text-main: #0a0f1d;
+  --text-muted: #64748b;
+  --bg-sticker: #0a0f1d;
+  --text-dark: #ffffff;
+  --accent-color: #0a0f1d;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-inter);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.font-tech {
+  font-family: var(--font-montserrat);
+}
+
+/* MLH Physical Card */
+.mlh-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  overflow: visible;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  box-sizing: border-box;
+}
+
+.mlh-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+/* MLH Floating Sticker Badge */
+.mlh-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background-color: var(--bg-sticker);
+  color: var(--text-dark);
+  font-family: var(--font-montserrat);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 3px 3px 0px var(--border-color);
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* MLH Typography */
+.mlh-card-subtitle {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+
+.mlh-card-title {
+  color: var(--text-main);
+  font-family: var(--font-montserrat);
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.mlh-card-text {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+/* MLH Mechanical Button */
+.mlh-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-main);
+  font-family: var(--font-montserrat);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.1s ease;
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.mlh-card-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-dark);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.mlh-card-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--border-color);
+}
+
+.mlh-card-btn-solid {
+  background-color: var(--border-color);
+  color: var(--text-dark);
+}
+
+.mlh-card-btn-solid:hover {
+  background-color: transparent;
+  color: var(--text-main);
+}
