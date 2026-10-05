@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+This study space is built with Gemma 2 and Mastra, conceived to help students, including self-paced learners, to master any topic they want, especially when they don't know what 
+to start with.
 
-# Run and deploy your AI Studio app
+It includes 
+- a full roadmap of chapters and notions to master, and links to videos to learn directly from.
+- flashcards and quizzes for the researched topics
+- Exam preparation tips
+- spaces to insert documents if the users already have some to learn
+- Engine options: whether Cloud (using Gemma 9B) or offline (Gemma 2B)
 
-This contains everything you need to run your app locally.
+# How to use it
 
-View your app in AI Studio: https://ai.studio/apps/9384a76c-f1c9-4db0-9820-b734f12d4b0a
+1. Download the zip file `Gemma-Atlas-main.zip` (or the file name in your Downloaded files).
 
-## Run Locally
+2. Unzip it in any directory you want
+`unzip Gemma-Atlas-main.zip -d /your/target/directory`
 
-**Prerequisites:**  Node.js
+3. Run `npm install` in this directory
 
+4. Run `npm run dev`
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+5. Open `http://localhost:3000` on your browser
+
+Enjoy your studies!
