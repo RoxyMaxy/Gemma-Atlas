@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { POST } from './app/api/chat/route';
+import { POST as POST_SESSION } from './app/api/session/route';
 
 dotenv.config();
 
@@ -66,6 +67,43 @@ app.post('/api/chat', async (req, res) => {
   } catch (error: any) {
     console.error('Server error handling /api/chat:', error);
     res.status(500).json({ error: error?.message || 'Internal server error' });
+  }
+});
+
+// Route handler adapter for /api/session (Generates structured course curriculum)
+app.post('/api/session', async (req, res) => {
+  try {
+    const protocol = req.protocol;
+    const host = req.get('host') || `localhost:${port}`;
+    const fullUrl = `${protocol}://${host}${req.originalUrl}`;
+
+    const headers = new Headers();
+    for (const [key, value] of Object.entries(req.headers)) {
+      if (typeof value === 'string') {
+        headers.set(key, value);
+      } else if (Array.isArray(value)) {
+        headers.set(key, value.join(', '));
+      }
+    }
+
+    const webRequest = new Request(fullUrl, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(req.body),
+    });
+
+    const webResponse = await POST_SESSION(webRequest);
+
+    res.status(webResponse.status);
+    webResponse.headers.forEach((val, key) => {
+      res.setHeader(key, val);
+    });
+
+    const data = await webResponse.json();
+    res.json(data);
+  } catch (error: any) {
+    console.error('Server error handling /api/session:', error);
+    res.status(500).json({ error: error?.message || 'Internal server error generating session' });
   }
 });
 

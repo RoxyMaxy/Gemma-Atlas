@@ -7,7 +7,7 @@ import {
 } from '../lib/vector/types';
 import { StorageService } from '../lib/vector/storageService';
 import { localVectorIndex, gemmaSwitcher } from '../lib/vector/engine';
-import { generateCourseSessionWithGemma } from '../lib/mastra/agent';
+import { generateCourseSessionWithGemma, generateFallbackSession } from '../lib/mastra/agent';
 import { RoadmapTab } from './dashboard/RoadmapTab';
 import { ConceptsTab } from './dashboard/ConceptsTab';
 import { PracticeTab } from './dashboard/PracticeTab';
@@ -513,8 +513,19 @@ export const ActiveDashboard: React.FC = () => {
       setSubjectInput('');
       setUploadedFiles([]);
     } catch (err: any) {
-      console.error(err);
-      setStatusMessage('Sprint generation complete (adaptive fallback active).');
+      console.warn('Primary sprint generation failed, generating tailored fallback session:', err);
+      const fallback = generateFallbackSession(targetSubject, profile);
+      const fallbackSession: CourseSession = {
+        ...fallback,
+        id: `session-${Date.now()}`,
+        timestamp: Date.now(),
+      };
+      StorageService.saveSession(fallbackSession);
+      setSessions(StorageService.getSessions());
+      setActiveSession(fallbackSession);
+      setActiveTab('roadmap');
+      setSubjectInput('');
+      setUploadedFiles([]);
     } finally {
       setIsGenerating(false);
       setStatusMessage('');
@@ -951,19 +962,41 @@ export const ActiveDashboard: React.FC = () => {
               ACTIVE SESSIONS:
             </span>
             {sessions.map((s) => (
-              <button
+              <div
                 key={s.id}
-                type="button"
-                onClick={() => {
-                  setActiveSession(s);
-                  StorageService.setActiveSessionId(s.id);
-                }}
-                className={`mlh-card-btn py-2 px-4 text-xs shrink-0 ${
-                  activeSession?.id === s.id ? 'mlh-card-btn-solid font-black' : ''
+                className={`inline-flex items-center gap-1.5 rounded-[4px] border-2 border-[var(--border-color)] px-3 py-1.5 text-xs font-tech font-bold transition-all shadow-[2px_2px_0px_#000] shrink-0 ${
+                  activeSession?.id === s.id
+                    ? 'bg-white text-black border-white font-black'
+                    : 'bg-[var(--bg-primary)] text-[var(--text-main)] hover:bg-white/10'
                 }`}
               >
-                {s.subject}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveSession(s);
+                    StorageService.setActiveSessionId(s.id);
+                  }}
+                  className="truncate max-w-[220px]"
+                >
+                  {s.subject}
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    StorageService.deleteSession(s.id);
+                    const remaining = StorageService.getSessions();
+                    setSessions(remaining);
+                    if (activeSession?.id === s.id) {
+                      setActiveSession(remaining.length > 0 ? remaining[0] : null);
+                    }
+                  }}
+                  className="opacity-60 hover:opacity-100 hover:text-red-400 p-0.5 ml-1"
+                  title="Delete session"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </div>
             ))}
           </div>
         )}

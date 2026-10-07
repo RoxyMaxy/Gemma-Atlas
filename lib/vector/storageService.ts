@@ -35,7 +35,31 @@ export class StorageService {
     const raw = localStorage.getItem(STORAGE_KEYS.COURSE_SESSIONS);
     if (!raw) return [];
     try {
-      return JSON.parse(raw);
+      const list = JSON.parse(raw);
+      if (!Array.isArray(list)) return [];
+      
+      // Auto-purge any obsolete sessions that have legacy "taxonomic" or "state space" text
+      const cleaned = list.filter((s: CourseSession) => {
+        if (!s || !Array.isArray(s.roadmap)) return false;
+        const isLegacyMock = s.roadmap.some((st: any) => {
+          const combined = `${st.chapterTitle || ''} ${st.subChapter || ''} ${st.hierarchyTitle || ''}`.toLowerCase();
+          return combined.includes('taxonomic') || combined.includes('state space');
+        });
+        return !isLegacyMock;
+      });
+
+      if (cleaned.length !== list.length) {
+        this.saveSessions(cleaned);
+        const currentActiveId = this.getActiveSessionId();
+        if (currentActiveId && !cleaned.some((s) => s.id === currentActiveId)) {
+          if (cleaned.length > 0) {
+            this.setActiveSessionId(cleaned[0].id);
+          } else {
+            localStorage.removeItem(STORAGE_KEYS.ACTIVE_SESSION_ID);
+          }
+        }
+      }
+      return cleaned;
     } catch {
       return [];
     }

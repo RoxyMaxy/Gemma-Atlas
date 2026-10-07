@@ -4,8 +4,15 @@ import { UserProfile } from '../../../lib/vector/types.ts';
 
 export const runtime = 'edge';
 
-// Specifically reference Gemma model endpoints (e.g., gemma-2-9b-it) as the primary target
-const GEMMA_MODEL_ENDPOINTS = ['gemma-2-9b-it', 'gemma-2-27b-it', 'gemini-3.8-flash'];
+// Gemma & Gemini model endpoints prioritized for low-latency and reliability
+const GEMMA_MODEL_ENDPOINTS = [
+  'gemini-3.1-flash-lite',
+  'gemini-3.5-flash-lite',
+  'gemini-flash-latest',
+  'gemini-3.5-flash',
+  'gemini-3.7-flash',
+  'gemini-3.8-flash',
+];
 
 export async function POST(req: Request) {
   try {
